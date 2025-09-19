@@ -8,10 +8,12 @@ Dieses Projekt nutzt künstliche Intelligenz, um automatisch zu bewerten, wie gu
 
 ## 🚀 Features
 
-- **KI-basierte Analyse**: Nutzt OpenAI's GPT-3.5-turbo für intelligente Textanalyse
-- **Einfache Bedienung**: Jobanzeige und Lebenslauf werden aus separaten Textdateien gelesen
-- **Numerische Bewertung**: Gibt eine klare Bewertung von 1-10 aus
-- **Deutsche Sprache**: Vollständig auf Deutsch optimiert
+- **🤖 KI-basierte Analyse**: Nutzt OpenAI's GPT-3.5-turbo für intelligente Textanalyse
+- **📁 Einfache Bedienung**: Jobanzeige und Lebenslauf werden aus separaten Textdateien gelesen
+- **📊 Numerische Bewertung**: Gibt eine klare Bewertung von 1-10 aus
+- **🇩🇪 Deutsche Sprache**: Vollständig auf Deutsch optimiert
+- **🔒 Sicherheit**: API-Schlüssel werden sicher über Umgebungsvariablen verwaltet
+- **⚡ Einfache Installation**: Automatische Abhängigkeitsverwaltung mit requirements.txt
 
 ## 📁 Projektstruktur
 
@@ -20,7 +22,10 @@ Jobanzeige-Analyse-mit-KI/
 ├── main.py              # Hauptprogramm
 ├── job_posting.txt      # Stellenausschreibung (zu bearbeiten)
 ├── resume.txt           # Lebenslauf (zu bearbeiten)
-├── requirements.txt     # Python-Abhängigkeiten (optional)
+├── .env                 # Umgebungsvariablen (nicht in Git, lokal erstellen)
+├── .env.example         # Vorlage für Umgebungsvariablen
+├── requirements.txt     # Python-Abhängigkeiten
+├── .gitignore          # Git-Ignore-Datei für Sicherheit
 └── README.md           # Diese Datei
 ```
 
@@ -51,14 +56,28 @@ Jobanzeige-Analyse-mit-KI/
 
 3. **Abhängigkeiten installieren**
    ```bash
-   pip install openai
+   pip install -r requirements.txt
    ```
 
-4. **OpenAI API-Schlüssel einrichten**
+4. **Umgebungsvariablen einrichten**
+   ```bash
+   # Kopiere die Beispiel-Datei
+   cp .env.example .env
+   
+   # Windows
+   copy .env.example .env
+   ```
+   
+   Dann öffne die `.env`-Datei und trage deinen OpenAI API-Schlüssel ein:
+   ```
+   OPENAI_API_KEY=dein_echter_api_schlüssel_hier
+   ```
+
+5. **OpenAI API-Schlüssel besorgen**
    - Gehe zu [platform.openai.com](https://platform.openai.com/)
    - Erstelle einen Account und füge eine Zahlungsmethode hinzu
    - Generiere einen neuen API-Schlüssel
-   - Ersetze den API-Schlüssel in `main.py` (Zeile 5-7)
+   - Trage ihn in die `.env`-Datei ein
 
 ## 📝 Verwendung
 
@@ -80,18 +99,26 @@ Jobanzeige-Analyse-mit-KI/
 
 ## ⚙️ Konfiguration
 
-### API-Schlüssel sicher verwenden
+### Sicherheitshinweise
 
-Für produktive Nutzung solltest du den API-Schlüssel als Umgebungsvariable setzen:
+🔒 **API-Schlüssel Sicherheit**: 
+- Der API-Schlüssel wird über Umgebungsvariablen geladen
+- Die `.env`-Datei wird nicht in Git übertragen (durch `.gitignore` geschützt)
+- Verwende die `.env.example` als Vorlage für die Einrichtung
 
-```python
-# Ersetze in main.py:
-client = openai.OpenAI(
-    api_key=os.getenv("OPENAI_API_KEY")
-)
+### Umgebungsvariablen
+
+Das Programm lädt automatisch Umgebungsvariablen aus der `.env`-Datei:
+
+```bash
+# .env Datei Beispiel:
+OPENAI_API_KEY=sk-proj-dein_api_schlüssel_hier
 ```
 
-Dann setze die Umgebungsvariable:
+### Alternative: System-Umgebungsvariablen
+
+Du kannst auch System-Umgebungsvariablen verwenden:
+
 ```bash
 # Windows
 set OPENAI_API_KEY=dein-api-schlüssel
@@ -143,9 +170,11 @@ Lebenslauf: {ll_text}
 
 ## 🚨 Wichtige Hinweise
 
-- **Kosten**: Jede Anfrage kostet Geld über die OpenAI API
-- **Datenschutz**: Stelle sicher, dass keine sensiblen Daten in öffentliche Repositories gelangen
-- **Genauigkeit**: Die KI-Bewertung ist ein Hilfsmittel, ersetzt aber nicht die menschliche Bewertung
+- **🔒 Sicherheit**: API-Schlüssel werden sicher über Umgebungsvariablen verwaltet
+- **💰 Kosten**: Jede Anfrage kostet Geld über die OpenAI API
+- **🔐 Datenschutz**: Sensible Daten werden nicht in Git gespeichert (siehe `.gitignore`)
+- **🎯 Genauigkeit**: Die KI-Bewertung ist ein Hilfsmittel, ersetzt aber nicht die menschliche Bewertung
+- **📁 Dateien**: Die `.env`-Datei muss lokal erstellt werden und wird nicht mit Git synchronisiert
 
 ## 🐛 Fehlerbehebung
 
@@ -153,12 +182,21 @@ Lebenslauf: {ll_text}
 
 - **`ModuleNotFoundError: No module named 'openai'`**
   ```bash
-  pip install openai
+  pip install -r requirements.txt
   ```
+
+- **`ValueError: OPENAI_API_KEY environment variable not set`**
+  - Erstelle eine `.env`-Datei basierend auf `.env.example`
+  - Trage deinen API-Schlüssel in die `.env`-Datei ein
+  - Stelle sicher, dass `python-dotenv` installiert ist
 
 - **`RateLimitError: You exceeded your current quota`**
   - Prüfe dein OpenAI-Guthaben
   - Füge eine Zahlungsmethode hinzu
+
+- **`AuthenticationError: Incorrect API key`**
+  - Überprüfe deinen API-Schlüssel in der `.env`-Datei
+  - Generiere einen neuen API-Schlüssel auf der OpenAI-Plattform
 
 - **`FileNotFoundError`**
   - Stelle sicher, dass `job_posting.txt` und `resume.txt` im gleichen Verzeichnis sind
@@ -180,7 +218,3 @@ Dieses Projekt steht unter der MIT-Lizenz. Siehe `LICENSE` Datei für Details.
 **Theodor Mrozik**
 - GitHub: [@Theodor-Mrozik](https://github.com/Theodor-Mrozik)
 
-## 🙏 Danksagungen
-
-- OpenAI für die GPT-3.5 API
-- Python Community für die excellenten Tools
