@@ -1,0 +1,8 @@
+Software Developer Position
+We are looking for a skilled software developer with experience in Python, JavaScript, and web development.
+Requirements:
+- 3+ years of programming experience
+- Knowledge of Python, JavaScript, HTML/CSS
+- Experience with databases (SQL)
+- Team collaboration skills
+- Bachelor's degree in Computer Science or related field

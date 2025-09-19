@@ -1,0 +1,11 @@
+John Doe
+Software Engineer
+
+Experience:
+- 4 years as Python Developer at Tech Company
+- Strong knowledge in JavaScript, React, and Node.js
+- Experience with MySQL and PostgreSQL databases
+- Led development team of 5 people
+- Bachelor's degree in Computer Science from University XYZ
+
+Skills: Python, JavaScript, React, Node.js, SQL, Git, Agile methodologies

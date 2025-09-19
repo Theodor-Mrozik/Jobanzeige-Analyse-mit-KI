@@ -6,16 +6,12 @@ client = openai.OpenAI(
     api_key="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"
 )
 
-job_text = """
+# Read job posting and resume from files
+with open('job_posting.txt', 'r',) as f:
+    job_text = f.read()
 
-
-
-"""
-
-ll_text = """
-
-
-"""
+with open('resume.txt', 'r') as f:
+    ll_text = f.read()
 
 prompt = f"""
 
