@@ -1,10 +1,20 @@
 import openai
 import os
 
-# Initialize the OpenAI client with your API key
-client = openai.OpenAI(
-    api_key="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"
-)
+# Load environment variables from .env file (for local development)
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    # python-dotenv not installed, using system environment variables
+    pass
+
+# Initialize the OpenAI client with your API key from environment variable
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise ValueError("OPENAI_API_KEY environment variable not set. Please check your .env file or system environment variables.")
+
+client = openai.OpenAI(api_key=api_key)
 
 # Read job posting and resume from files
 with open('job_posting.txt', 'r',) as f:
